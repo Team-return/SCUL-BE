@@ -21,7 +21,7 @@ class GetCultureService (
 
         val currentUser: User = userFacade.getCurrentUser()
         val culture: Culture = cultureRepository.findCultureById(cultureId)
-        val isBookMarked = bookMarkRepository.existBookMarkByCultureAndUser(culture ,currentUser)
+        val isBookMarked = bookMarkRepository.existsByCultureAndUser(culture ,currentUser)
 
         return GetCultureResponse.of(culture, isBookMarked)
     }

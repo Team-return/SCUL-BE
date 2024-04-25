@@ -5,16 +5,13 @@ import scul.projectscul.domain.bookmark.domain.BookMark
 import scul.projectscul.domain.bookmark.domain.BookMarkId
 import scul.projectscul.domain.culture.domain.Culture
 import scul.projectscul.domain.user.domain.User
-import java.util.*
 
 
 interface BookMarkRepository: JpaRepository<BookMark, BookMarkId> {
 
     fun findBookMarksByUser(user: User): List<BookMark>
 
-    fun existBookMarkByCultureAndUser(culture: Culture, user: User): Boolean
+    fun existsByCultureAndUser(culture: Culture, user: User) : Boolean
 
     fun findBookMarkByCultureAndUser(culture: Culture, user: User) : BookMark?
-
-    fun existsByCultureAndUser(culture: Culture, user: User) : Boolean
 }
