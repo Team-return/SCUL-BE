@@ -31,9 +31,7 @@ jwt:
 
 logging:
   level:
-    com.example : DEBUG
-    org:
-      hibernate:
-        type:
-          descriptor:
-            sql: trace
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
