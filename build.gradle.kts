@@ -60,6 +60,8 @@ dependencies {
 	//test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+
+	implementation ("commons-io:commons-io:2.16.1")
 }
 
 tasks.withType<KotlinCompile> {
