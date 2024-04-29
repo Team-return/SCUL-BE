@@ -1,9 +1,7 @@
 package scul.projectscul.global.security.auth
 
-import com.example.kotlinpractice.global.security.auth.AuthDetails
 import scul.projectscul.domain.user.domain.User
 import scul.projectscul.domain.user.domain.repository.UserRepository
-import scul.projectscul.domain.user.exception.UserNotFoundException
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service

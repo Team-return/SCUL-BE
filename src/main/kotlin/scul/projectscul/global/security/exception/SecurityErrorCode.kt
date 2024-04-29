@@ -1,4 +1,4 @@
-package com.example.kotlinpractice.global.security.exception
+package scul.projectscul.global.security.exception
 
 import com.example.kotlinpractice.global.error.exception.ErrorProperty
 

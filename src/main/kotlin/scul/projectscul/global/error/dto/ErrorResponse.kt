@@ -1,6 +1,6 @@
-package com.example.kotlinpractice.global.error.dto
+package scul.projectscul.global.error.dto
 
-import com.example.kotlinpractice.global.error.GlobalErrorCode
+import scul.projectscul.global.error.GlobalErrorCode
 import com.example.kotlinpractice.global.error.exception.ErrorProperty
 import jakarta.validation.ConstraintViolationException
 import org.springframework.dao.DataIntegrityViolationException

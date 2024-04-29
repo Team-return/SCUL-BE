@@ -1,4 +1,4 @@
-package com.study.kotlkotlin.global.security.jwt
+package scul.projectscul.global.security.jwt
 
 import scul.projectscul.global.security.jwt.JwtTokenProvider
 import jakarta.servlet.FilterChain

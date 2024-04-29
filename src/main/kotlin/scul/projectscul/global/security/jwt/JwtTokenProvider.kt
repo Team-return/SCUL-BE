@@ -2,8 +2,8 @@ package scul.projectscul.global.security.jwt
 
 import scul.projectscul.global.redis.repository.RefreshTokenRepository
 import scul.projectscul.global.security.auth.AuthDetailsService
-import com.example.kotlinpractice.global.security.exception.ExpiredTokenException
-import com.study.kotlkotlin.global.security.exception.InvalidTokenException
+import scul.projectscul.global.security.exception.ExpiredTokenException
+import scul.projectscul.global.security.exception.InvalidTokenException
 import io.jsonwebtoken.*
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletRequest
@@ -17,7 +17,8 @@ import java.util.*
 
 
 @Component
-class JwtTokenProvider(
+class
+JwtTokenProvider(
         private val jwtProperties: JwtProperties,
         private val refreshTokenRepository: RefreshTokenRepository,
         private val authDetailsService: AuthDetailsService

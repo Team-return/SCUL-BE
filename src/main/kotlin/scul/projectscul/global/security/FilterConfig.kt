@@ -1,8 +1,8 @@
 package scul.projectscul.global.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.example.kotlinpractice.global.error.GlobalExceptionFilter
-import com.study.kotlkotlin.global.security.jwt.JwtFilter
+import scul.projectscul.global.error.GlobalExceptionFilter
+import scul.projectscul.global.security.jwt.JwtFilter
 import scul.projectscul.global.security.jwt.JwtTokenProvider
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter
 import org.springframework.security.config.annotation.web.builders.HttpSecurity

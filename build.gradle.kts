@@ -39,8 +39,8 @@ dependencies {
 	implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.0")
 
 	//open api 파싱
-	implementation ("com.google.code.gson:gson:2.8.6")
-	implementation ("org.json:json:20210307")
+	implementation ("com.google.code.gson:gson:2.8.9")
+	implementation ("org.json:json:20231013")
 
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")

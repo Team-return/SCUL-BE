@@ -1,4 +1,4 @@
-package com.example.kotlinpractice.global.security.auth
+package scul.projectscul.global.security.auth
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

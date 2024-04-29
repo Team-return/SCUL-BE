@@ -1,4 +1,4 @@
-package com.example.kotlinpractice.global.entity
+package scul.projectscul.global.entity
 
 import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator

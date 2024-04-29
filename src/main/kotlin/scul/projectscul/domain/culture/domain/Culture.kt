@@ -1,9 +1,8 @@
 package scul.projectscul.domain.culture.domain
 
-import com.example.kotlinpractice.global.entity.BaseUUIDEntity
+import scul.projectscul.global.entity.BaseUUIDEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import scul.projectscul.domain.culture.domain.enum.CultureType
 import java.util.*
 
 @Entity

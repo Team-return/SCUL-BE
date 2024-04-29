@@ -1,4 +1,4 @@
-package com.example.kotlinpractice.global.error
+package scul.projectscul.global.error
 
 import com.example.kotlinpractice.global.error.exception.ErrorProperty
 import org.springframework.http.HttpStatus

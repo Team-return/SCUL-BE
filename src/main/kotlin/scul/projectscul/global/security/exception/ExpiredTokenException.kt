@@ -1,6 +1,6 @@
-package com.example.kotlinpractice.global.security.exception
+package scul.projectscul.global.security.exception
 
-import com.example.kotlinpractice.global.error.ErrorCode
+import scul.projectscul.global.error.ErrorCode
 import com.example.kotlinpractice.global.error.exception.BusinessException
 
 

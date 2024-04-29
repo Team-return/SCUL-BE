@@ -1,6 +1,6 @@
 package scul.projectscul.domain.user.domain
 
-import com.example.kotlinpractice.global.entity.BaseUUIDEntity
+import scul.projectscul.global.entity.BaseUUIDEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import java.util.*
