@@ -16,10 +16,10 @@ spring:
         show_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
         defer-datasource-initialization: true
-data:
+  data:
     redis:
-      host: ${REDIS_HOST:redis.xquare.app}
-      port: ${REDIS_PORT:6379}
+      host: redis.xquare.app
+      port: 6379
 
 jwt:
   header: ${HEADER:Authorization}
