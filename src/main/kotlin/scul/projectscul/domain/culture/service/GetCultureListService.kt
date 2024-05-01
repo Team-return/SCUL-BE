@@ -19,17 +19,17 @@ class GetCultureListService (
 ) {
     fun execute(): GetCultureListResponse {
         val culture: List<Culture> = cultureRepository.findAll()
-        val currentUser: User = userFacade.getCurrentUser()
+        //val currentUser: User = userFacade.getCurrentUser()
 
         return GetCultureListResponse(
                 culture.map { cultureItem ->
-                    val isBookMarked: Boolean = bookMarkRepository.existsByCultureAndUser(cultureItem, currentUser)
+                    //val isBookMarked: Boolean = bookMarkRepository.existsByCultureAndUser(cultureItem, currentUser)
                     GetCultureListResponse.CultureListResponse(
                             id = cultureItem.id,
                             location = cultureItem.location,
                             placeName = cultureItem.placeName,
                             ticketPrice = cultureItem.ticketPrice,
-                            isBookMarked = isBookMarked,
+                            isBookMarked = false,
                             imageUrl = cultureItem.imageUrl,
                             cultureName = cultureItem.cultureName,
                             wantedPeople = cultureItem.wantedPeople

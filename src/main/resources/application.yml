@@ -18,8 +18,9 @@ spring:
         defer-datasource-initialization: true
   data:
     redis:
-      host: redis.xquare.app
+      host: localhost
       port: 6379
+      password: asdf
 
 jwt:
   header: ${HEADER:Authorization}

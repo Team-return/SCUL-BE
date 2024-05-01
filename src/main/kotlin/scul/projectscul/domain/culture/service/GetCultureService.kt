@@ -19,10 +19,11 @@ class GetCultureService (
 ) {
     fun execute(cultureId: UUID): GetCultureResponse {
 
-        val currentUser: User = userFacade.getCurrentUser()
+        //val currentUser: User = userFacade.getCurrentUser()
         val culture: Culture = cultureRepository.findCultureById(cultureId)
-        val isBookMarked = bookMarkRepository.existsByCultureAndUser(culture ,currentUser)
+        //val isBookMarked = bookMarkRepository.existsByCultureAndUser(culture ,currentUser)
 
-        return GetCultureResponse.of(culture, isBookMarked)
+        //return GetCultureResponse.of(culture, isBookMarked)
+        return GetCultureResponse.of(culture, false)
     }
 }
