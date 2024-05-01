@@ -17,13 +17,13 @@ import javax.xml.parsers.DocumentBuilderFactory
 class OpenApiService (
         private val cultureRepository: CultureRepository
 ) {
-    suspend fun execute() {
+    suspend fun execute(startPage: Int, endPage: Int) {
         cultureRepository.deleteAll()
-        fetchCultures()
+        fetchCultures(startPage, endPage)
     }
 
-    private suspend fun fetchCultures(): ResponseEntity<String> {
-        val urlBuilder = "http://openAPI.seoul.go.kr:8088/4e724e637a31323138375478514353/xml/ListPublicReservationCulture/1/5/"
+    private suspend fun fetchCultures(startPage: Int, endPage: Int): ResponseEntity<String> {
+        val urlBuilder = "http://openAPI.seoul.go.kr:8088/4e724e637a31323138375478514353/xml/ListPublicReservationCulture/$startPage/$endPage/"
 
         val url = URL(urlBuilder)
         val conn = url.openConnection() as HttpURLConnection

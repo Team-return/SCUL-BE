@@ -35,7 +35,10 @@ class CultureController (
     }
 
     @GetMapping("/api")
-    suspend fun saveCultureData() {
-        openApiService.execute()
+    suspend fun saveCultureData(
+            @RequestParam(name = "start_page", required = false) startPage: Int,
+            @RequestParam(name = "end_page", required = false) endPage: Int)
+    {
+        openApiService.execute(startPage, endPage)
     }
 }
