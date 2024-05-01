@@ -19,7 +19,7 @@ class LoginService (
     fun execute(request: LoginRequest): TokenResponse {
         val user = userRepository.findByAccountId(request.accountId)
 
-            if(!passwordEncoder.matches(request.password, user.password)) {
+            if(request.password != user.password) {
                 throw PasswordMisMatchException
             }
                 return jwtProvider.generateTokens(accountId = request.accountId)
