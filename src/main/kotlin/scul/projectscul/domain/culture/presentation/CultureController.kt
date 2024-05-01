@@ -22,11 +22,8 @@ class CultureController (
 ) {
 
     @GetMapping
-    fun getCultureList(
-            @RequestParam(name = "title", required = false) title: String,
-            @RequestParam(name = "wanted_people", required = false) wantedPeople: String
-    ): GetCultureListResponse {
-        return getCultureListService.execute(title, wantedPeople)
+    fun getCultureList(): GetCultureListResponse {
+        return getCultureListService.execute()
     }
 
     @GetMapping("/{culture-id}")

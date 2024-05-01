@@ -17,8 +17,8 @@ class GetCultureListService (
         private val bookMarkRepository: BookMarkRepository,
         private val userFacade: UserFacade
 ) {
-    fun execute(title: String, wantPeople: String): GetCultureListResponse {
-        val culture: List<Culture> = cultureRepository.findCulturesByWantedPeopleContainingAndCultureNameContaining(wantPeople, title)
+    fun execute(): GetCultureListResponse {
+        val culture: List<Culture> = cultureRepository.findAll()
         val currentUser: User = userFacade.getCurrentUser()
 
         return GetCultureListResponse(
