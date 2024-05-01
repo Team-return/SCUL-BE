@@ -28,7 +28,7 @@ class SignUpService (
                         id = null,
                         name = request.name,
                         accountId = request.accountId,
-                        password = passwordEncoder.encode(request.password)
+                        password = request.password
                 )
         )
         return jwtTokenProvider.generateTokens(accountId = request.accountId)
