@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-class JwtProperties(
+data class JwtProperties(
         @Value("\${jwt.header}") val header: String,
         @Value("\${jwt.prefix}") val prefix: String,
         @Value("\${jwt.secret-key}") val secretKey: String,

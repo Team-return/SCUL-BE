@@ -1,97 +1,89 @@
 package scul.projectscul.global.security.jwt
 
-import scul.projectscul.global.redis.repository.RefreshTokenRepository
 import scul.projectscul.global.security.auth.AuthDetailsService
-import scul.projectscul.global.security.exception.ExpiredTokenException
-import scul.projectscul.global.security.exception.InvalidTokenException
-import io.jsonwebtoken.*
-import io.jsonwebtoken.security.Keys
+import scul.projectscul.global.security.domain.RefreshToken
+import scul.projectscul.global.security.domain.repository.RefreshTokenRepository
+import scul.projectscul.global.security.dto.response.TokenResponse
+import io.jsonwebtoken.Claims
+import io.jsonwebtoken.ExpiredJwtException
+import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureAlgorithm
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
-import scul.projectscul.global.redis.domain.RefreshToken
-import scul.projectscul.global.redis.dto.TokenResponse
-import java.time.LocalDateTime
-import java.util.*
-
+import org.springframework.util.StringUtils
+import java.util.Date
 
 @Component
-class
-JwtTokenProvider(
+class JwtTokenProvider(
         private val jwtProperties: JwtProperties,
-        private val refreshTokenRepository: RefreshTokenRepository,
-        private val authDetailsService: AuthDetailsService
+        private val authDetailsService: AuthDetailsService,
+        private val refreshTokenRepository: RefreshTokenRepository
 ) {
-
-    fun generateTokens(accountId: String): TokenResponse {
-        return TokenResponse(
-            accessToken = createAccessToken(accountId),
-            accessTokenExp = LocalDateTime.now().plusSeconds(jwtProperties.accessExp),
-            refreshToken = createRefreshToken(accountId)
-        )
+    companion object {
+        private const val ACCESS = "access_token"
+        private const val REFRESH = "refresh_token"
     }
 
-    fun createAccessToken(accountId: String): String {
-        return createToken(accountId, "access", jwtProperties.accessExp)
-    }
-
-    fun createRefreshToken(accountId: String): String {
-        val token = createToken(accountId, "refresh", jwtProperties.refreshExp)
+    fun generateToken(accountId: String): TokenResponse {
+        val accessToken: String = generateAccessToken(accountId, ACCESS, jwtProperties.accessExp)
+        val refreshToken: String = generateRefreshToken(REFRESH, jwtProperties.refreshExp)
         refreshTokenRepository.save(
-            RefreshToken(
-                username = accountId,
-                token = token,
-                expiration = jwtProperties.refreshExp * 1000
-            )
+            RefreshToken(accountId, refreshToken, jwtProperties.refreshExp)
         )
-        return token
+        return TokenResponse(accessToken, refreshToken)
     }
 
-    private fun createToken(username: String, jwtType: String, exp: Long): String {
+    private fun generateAccessToken(accountId: String, typ: String, exp: Long): String {
         return Jwts.builder()
-            .signWith(Keys.hmacShaKeyFor(jwtProperties.secretKey.toByteArray()), SignatureAlgorithm.HS256)
-            .setSubject(username)
-            .setHeaderParam(Header.JWT_TYPE, jwtType)
-            .setId(username)
+            .setSubject(accountId)
+            .claim("typ", typ)
+            .signWith(SignatureAlgorithm.HS256, jwtProperties.secretKey)
             .setExpiration(Date(System.currentTimeMillis() + exp * 1000))
             .setIssuedAt(Date())
             .compact()
     }
 
-    fun getAuthentication(token: String): Authentication {
-
-        val claims = getClaims(token)
-        if (claims.header[Header.JWT_TYPE] == "access") {
-            throw InvalidTokenException.EXCEPTION
-        }
-
-        val details = authDetailsService.loadUserByUsername(claims.body.id)
-        return UsernamePasswordAuthenticationToken(details, "", details.authorities)
+    private fun generateRefreshToken(type: String, ttl: Long): String {
+        return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.secretKey)
+            .setHeaderParam("type", type)
+            .setIssuedAt(Date())
+            .setExpiration(Date(System.currentTimeMillis() + ttl * 1000))
+            .compact()
     }
 
-    private fun getClaims(token: String): Jws<Claims> {
+
+    fun getAuthentication(token: String): UsernamePasswordAuthenticationToken {
+        val userDetails: UserDetails = authDetailsService.loadUserByUsername(getAccountId(token))
+        return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
+    }
+
+    private fun getAccountId(token: String): String {
+        return getClaims(token).subject
+    }
+
+    private fun getClaims(token: String): Claims {
         return try {
-            Jwts
-                .parser()
+            Jwts.parser()
                 .setSigningKey(jwtProperties.secretKey)
                 .parseClaimsJws(token)
+                .body
+        } catch (e: ExpiredJwtException) {
+            throw Exception()
         } catch (e: Exception) {
-            when (e) {
-                is ExpiredTokenException -> throw ExpiredTokenException.EXCEPTION
-                else -> throw InvalidTokenException.EXCEPTION
-            }
+            e.printStackTrace()
+            throw Exception()
         }
     }
 
     fun resolveToken(request: HttpServletRequest): String? {
-
         val bearerToken = request.getHeader(jwtProperties.header)
 
-        if (bearerToken != null && (bearerToken.startsWith(jwtProperties.header))) {
-            return bearerToken.substring(7)
-        }
-        return null
+        return if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(jwtProperties.prefix)
+            && bearerToken.length > jwtProperties.prefix.length + 1
+        ) {
+            bearerToken.substring(jwtProperties.prefix.length)
+        } else null
     }
-
 }

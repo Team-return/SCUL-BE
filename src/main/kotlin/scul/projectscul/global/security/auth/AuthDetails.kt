@@ -2,22 +2,18 @@ package scul.projectscul.global.security.auth
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import scul.projectscul.domain.user.domain.User
 
 class AuthDetails(
-    val user: User
-): UserDetails {
-
-    override fun getAuthorities(): Collection<GrantedAuthority>? {
-        return null
-    }
+    private val userId: String
+) : UserDetails {
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> = mutableListOf()
 
     override fun getPassword(): String? {
         return null
     }
 
     override fun getUsername(): String {
-        return user.accountId
+        return userId
     }
 
     override fun isAccountNonExpired(): Boolean {

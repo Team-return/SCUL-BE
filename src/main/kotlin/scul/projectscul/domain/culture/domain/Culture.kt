@@ -1,6 +1,6 @@
 package scul.projectscul.domain.culture.domain
 
-import scul.projectscul.global.entity.BaseUUIDEntity
+import scul.projectscul.domain.bookmark.BaseUUIDEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import java.util.*

@@ -1,8 +1,9 @@
 package scul.projectscul.domain.user.exception
 
-import scul.projectscul.global.error.ErrorCode
-import com.example.kotlinpractice.global.error.exception.BusinessException
+import scul.projectscul.global.security.error.exception.ErrorCode
+import scul.projectscul.global.security.error.exception.SculException
 
-object UserAlreadyExistsException : BusinessException(
-        ErrorCode.USER_ALREADY_EXISTS
+
+object UserAlreadyExistsException : SculException(
+        ErrorCode.ACCOUNT_ID_ALREADY_EXIST
 )

@@ -1,6 +1,6 @@
 package scul.projectscul.domain.review.domain
 
-import scul.projectscul.global.entity.BaseUUIDEntity
+import scul.projectscul.domain.bookmark.BaseUUIDEntity
 import jakarta.persistence.*
 import scul.projectscul.domain.culture.domain.Culture
 import scul.projectscul.domain.user.domain.User

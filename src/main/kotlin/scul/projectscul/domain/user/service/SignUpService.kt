@@ -1,13 +1,12 @@
 package scul.projectscul.domain.user.service
 
+import scul.projectscul.global.security.dto.response.TokenResponse
 import jakarta.transaction.Transactional
-import org.springframework.security.crypto.password.PasswordEncoder
 import scul.projectscul.domain.user.domain.User
 import scul.projectscul.domain.user.domain.repository.UserRepository
 import scul.projectscul.domain.user.exception.UserAlreadyExistsException
 import scul.projectscul.domain.user.presentation.request.SignUpRequest
 import org.springframework.stereotype.Service
-import scul.projectscul.global.redis.dto.TokenResponse
 import scul.projectscul.global.security.jwt.JwtTokenProvider
 
 @Service
@@ -15,10 +14,9 @@ import scul.projectscul.global.security.jwt.JwtTokenProvider
 class SignUpService (
         private val userRepository: UserRepository,
         private val jwtTokenProvider: JwtTokenProvider,
-        private val passwordEncoder: PasswordEncoder
 ){
 
-    fun execute(request: SignUpRequest) : TokenResponse{
+    fun execute(request: SignUpRequest) : TokenResponse {
         if (userRepository.existsByAccountId(request.accountId)){
             throw UserAlreadyExistsException
         }
@@ -31,6 +29,6 @@ class SignUpService (
                         password = request.password
                 )
         )
-        return jwtTokenProvider.generateTokens(accountId = request.accountId)
+        return jwtTokenProvider.generateToken(request.accountId)
     }
 }

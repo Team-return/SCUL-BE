@@ -1,8 +1,8 @@
 package scul.projectscul.domain.user.exception
 
-import scul.projectscul.global.error.ErrorCode
-import com.example.kotlinpractice.global.error.exception.BusinessException
+import scul.projectscul.global.security.error.exception.ErrorCode
+import scul.projectscul.global.security.error.exception.SculException
 
-object PasswordMisMatchException : BusinessException(
-        ErrorCode.PASSWORD_MIS_MATCH
+object PasswordMisMatchException : SculException(
+        ErrorCode.PASSWORD_MISMATCH
 )

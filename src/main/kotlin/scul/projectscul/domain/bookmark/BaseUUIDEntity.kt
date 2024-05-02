@@ -1,4 +1,4 @@
-package scul.projectscul.global.entity
+package scul.projectscul.domain.bookmark
 
 import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
