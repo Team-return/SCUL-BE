@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import java.util.Date
+import io.jsonwebtoken.security.Keys
+import java.security.Key
 
 @Component
 class JwtTokenProvider(
@@ -21,6 +23,9 @@ class JwtTokenProvider(
         private val authDetailsService: AuthDetailsService,
         private val refreshTokenRepository: RefreshTokenRepository
 ) {
+
+    val key: Key = Keys.secretKeyFor(SignatureAlgorithm.HS512)
+
     companion object {
         private const val ACCESS = "access_token"
         private const val REFRESH = "refresh_token"
@@ -36,21 +41,24 @@ class JwtTokenProvider(
     }
 
     private fun generateAccessToken(accountId: String, typ: String, exp: Long): String {
+
         return Jwts.builder()
             .setSubject(accountId)
             .claim("typ", typ)
-            .signWith(SignatureAlgorithm.HS256, jwtProperties.secretKey)
+            .signWith(key)
             .setExpiration(Date(System.currentTimeMillis() + exp * 1000))
             .setIssuedAt(Date())
             .compact()
     }
 
     private fun generateRefreshToken(type: String, ttl: Long): String {
-        return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.secretKey)
+
+        return Jwts.builder()
             .setHeaderParam("type", type)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + ttl * 1000))
-            .compact()
+                .signWith(key)
+                .compact()
     }
 
 
@@ -66,7 +74,7 @@ class JwtTokenProvider(
     private fun getClaims(token: String): Claims {
         return try {
             Jwts.parser()
-                .setSigningKey(jwtProperties.secretKey)
+                .setSigningKey(key)
                 .parseClaimsJws(token)
                 .body
         } catch (e: ExpiredJwtException) {
