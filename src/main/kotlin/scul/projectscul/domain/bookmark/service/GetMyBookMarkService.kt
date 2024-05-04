@@ -30,7 +30,9 @@ class GetMyBookMarkService (
                             isBookMarked = true,
                             imageUrl = cultureItem.imageUrl,
                             cultureName = cultureItem.cultureName,
-                            wantedPeople = cultureItem.wantedPeople
+                            wantedPeople = cultureItem.wantedPeople,
+                            applicationStartDate = cultureItem.applicationStartDate,
+                            applicationEndDate = cultureItem.applicationEndDate
                     )
                 }
         )
