@@ -13,6 +13,8 @@ data class GetCultureListResponse(
             val isBookMarked: Boolean,
             val imageUrl: String,
             val cultureName: String,
-            val wantedPeople: String
-    )
+            val wantedPeople: String,
+            val applicationStartDate: String,
+            val applicationEndDate: String,
+            )
 }
