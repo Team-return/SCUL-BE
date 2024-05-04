@@ -22,6 +22,8 @@ class GetMyBookMarkService (
 
         return GetCultureListResponse(
                 cultureList.map { cultureItem ->
+                    val wantedPeople = cultureItem.wantedPeople.drop(1) //첫 번째 글자 제거함
+
                     GetCultureListResponse.CultureListResponse(
                             id = cultureItem.id,
                             location = cultureItem.location,
@@ -30,7 +32,7 @@ class GetMyBookMarkService (
                             isBookMarked = true,
                             imageUrl = cultureItem.imageUrl,
                             cultureName = cultureItem.cultureName,
-                            wantedPeople = cultureItem.wantedPeople,
+                            wantedPeople = wantedPeople,
                             applicationStartDate = cultureItem.applicationStartDate,
                             applicationEndDate = cultureItem.applicationEndDate
                     )

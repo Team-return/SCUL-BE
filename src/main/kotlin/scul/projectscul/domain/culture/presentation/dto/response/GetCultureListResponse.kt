@@ -16,5 +16,8 @@ data class GetCultureListResponse(
             val wantedPeople: String,
             val applicationStartDate: String,
             val applicationEndDate: String,
-            )
+            ) {
+        val wantedPeopleWithoutFirstChar: String
+            get() = wantedPeople.drop(1)
+    }
 }

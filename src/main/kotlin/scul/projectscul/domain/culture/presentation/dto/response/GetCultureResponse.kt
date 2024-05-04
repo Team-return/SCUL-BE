@@ -21,9 +21,11 @@ data class GetCultureResponse (
     val cultureLink: String,
     val xCoordinate: Double,
     val yCoordinate: Double
-) {
+)
+{
     companion object {
         fun of(culture: Culture, isBookMarked: Boolean): GetCultureResponse {
+            val wantedPeoples = culture.wantedPeople.drop(1)
             return GetCultureResponse(
                     id = culture.id,
                     location = culture.location,
@@ -32,7 +34,7 @@ data class GetCultureResponse (
                     isBookMarked = isBookMarked,
                     imageUrl = culture.imageUrl,
                     cultureName = culture.cultureName,
-                    wantedPeople = culture.wantedPeople,
+                    wantedPeople = wantedPeoples,
                     content = culture.content,
                     phoneNumber = culture.phoneNumber,
                     applicationStartDate = culture.applicationStartDate,

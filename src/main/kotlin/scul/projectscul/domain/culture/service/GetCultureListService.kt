@@ -24,6 +24,8 @@ class GetCultureListService (
         return GetCultureListResponse(
                 culture.map { cultureItem ->
                     val isBookMarked: Boolean = bookMarkRepository.existsByCultureAndUser(cultureItem, currentUser)
+                    val wantedPeople = cultureItem.wantedPeople.drop(1) //첫 번째 글자 제거함
+
                     GetCultureListResponse.CultureListResponse(
                             id = cultureItem.id,
                             location = cultureItem.location,
@@ -32,7 +34,7 @@ class GetCultureListService (
                             isBookMarked = isBookMarked,
                             imageUrl = cultureItem.imageUrl,
                             cultureName = cultureItem.cultureName,
-                            wantedPeople = cultureItem.wantedPeople,
+                            wantedPeople = wantedPeople,
                             applicationStartDate = cultureItem.applicationStartDate,
                             applicationEndDate = cultureItem.applicationEndDate
                     )
