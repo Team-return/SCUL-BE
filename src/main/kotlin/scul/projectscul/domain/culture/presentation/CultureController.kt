@@ -26,7 +26,7 @@ class CultureController (
         return getCultureListService.execute()
     }
 
-    @GetMapping("/{culture-id}")
+    @GetMapping("/detail/{culture-id}")
     fun getCulture(@PathVariable("culture-id") @NotNull cultureId: UUID): GetCultureResponse {
         return getCultureService.execute(cultureId)
     }
