@@ -10,6 +10,7 @@ import scul.projectscul.domain.culture.presentation.dto.response.GetCultureListR
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureResponse
 import scul.projectscul.domain.culture.service.GetCultureListService
 import scul.projectscul.domain.culture.service.GetCultureService
+import scul.projectscul.domain.culture.service.GetTagCultureService
 import scul.projectscul.domain.culture.service.SearchCultureService
 import scul.projectscul.infra.open.OpenApiService
 import java.util.*
@@ -19,7 +20,8 @@ import java.util.*
 class CultureController (
         private val openApiService: OpenApiService,
         private val getCultureListService: GetCultureListService,
-        private val getCultureService: GetCultureService
+        private val getCultureService: GetCultureService,
+        private val getTagCultureService: GetTagCultureService,
         private val searchCultureService: SearchCultureService
 ) {
 
@@ -32,6 +34,12 @@ class CultureController (
     fun getCulture(@PathVariable("culture-id") @NotNull cultureId: UUID): GetCultureResponse {
         return getCultureService.execute(cultureId)
     }
+
+    @GetMapping("/tag")
+    fun getCulture(@RequestParam(name = "tag") tag: String): GetCultureListResponse {
+        return getTagCultureService.execute(tag)
+    }
+
     @GetMapping("/search")
     fun searchCulture(@RequestParam(name = "keyword") keyword: String): GetCultureListResponse {
         return searchCultureService.execute(keyword)

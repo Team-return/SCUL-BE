@@ -5,7 +5,7 @@ import java.util.UUID
 data class GetCultureListResponse(
         val culture: List<CultureListResponse>
 ) {
-    data class CultureListResponse (
+    data class CultureListResponse(
             val id: UUID?,
             val location: String,
             val placeName: String,
@@ -16,8 +16,5 @@ data class GetCultureListResponse(
             val wantedPeople: String,
             val applicationStartDate: String,
             val applicationEndDate: String,
-            ) {
-        val wantedPeopleWithoutFirstChar: String
-            get() = wantedPeople.drop(1)
-    }
+    )
 }
