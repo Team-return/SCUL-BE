@@ -1,20 +1,21 @@
 package scul.projectscul.domain.bookmark.domain
 
 import jakarta.persistence.*
+import scul.projectscul.domain.bookmark.BaseUUIDEntity
 import scul.projectscul.domain.culture.domain.Culture
 import scul.projectscul.domain.user.domain.User
-
+import java.util.*
 @Entity
-@IdClass(BookMarkId::class)
 class BookMark (
 
-        @Id
+        id: UUID?,
+
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "user_id", columnDefinition = "BINARY(16)", nullable = false)
+        @JoinColumn(name = "user_id")
         val user: User?,
 
-        @Id
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "culture_id", columnDefinition = "BINARY(16)", nullable = false)
-        val culture: Culture?,
-)
+        @JoinColumn(name = "culture_id")
+        val culture: Culture?
+
+) : BaseUUIDEntity(id)

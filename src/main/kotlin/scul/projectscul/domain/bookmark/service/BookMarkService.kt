@@ -28,7 +28,8 @@ class BookMarkService (
             bookMarkRepository.save(
                     BookMark(
                          user = currentUser,
-                         culture = culture
+                         culture = culture,
+                            id = null
                     )
             )
         }
