@@ -30,6 +30,10 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+	//S3
+	implementation ("com.amazonaws:aws-java-sdk-s3:1.12.715")
+
+	//jwt
 	implementation("io.jsonwebtoken:jjwt-api:0.10.7")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.10.7")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.10.7")

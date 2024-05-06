@@ -28,6 +28,15 @@ jwt:
   access-exp: ${JWT_ACCESS_EXP:10000}
   refresh-exp: ${JWT_REFRESH_EXP:604800}
 
+cloud:
+  aws:
+    credentials:
+      access-key: ad
+      secret-key: ad
+    s3:
+      bucket: kangsunbucket
+    region:
+      static: ap-northeast-2
 
 logging:
   level:
