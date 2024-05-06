@@ -33,10 +33,10 @@ class Culture (
         @Column(columnDefinition = "VARCHAR(50)", nullable = true)
         val phoneNumber: String,
 
-        //서비스 개시 시작일시
+        //접수 시작일시
         val applicationStartDate: String,
 
-        //서비스 개시 시작일시
+        //접수 끝나는 일시
         val applicationEndDate: String,
 
         //서비스 개시 시작일시
