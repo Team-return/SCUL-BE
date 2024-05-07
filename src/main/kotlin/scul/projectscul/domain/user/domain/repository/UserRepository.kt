@@ -10,6 +10,6 @@ interface UserRepository : CrudRepository<User, UUID>{
 
     fun findByAccountId(accountId: String) : User?
 
-    fun findUserByAccountId(accountId: String) : User
+    fun findUserByAccountId(accountId: String) : User?
 
 }
