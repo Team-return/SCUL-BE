@@ -30,8 +30,8 @@ jwt:
   header: ${HEADER:Authorization}
   prefix : ${PREFIX:Bearer}
   secret-key: ${JWT_SECRET_KEY:dfhasjkdddddddddddddddddddddddfhayffhdtyhdhydshghjkdfaskverafter}
-  access-exp: ${JWT_ACCESS_EXP:10000}
-  refresh-exp: ${JWT_REFRESH_EXP:604800}
+  access-exp: ${JWT_ACCESS_EXP:10000000}
+  refresh-exp: ${JWT_REFRESH_EXP:6048000}
 
 cloud:
   aws:
