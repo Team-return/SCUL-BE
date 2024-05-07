@@ -22,7 +22,7 @@ class SearchCultureService (
         val culture: List<Culture> = cultureRepository.findByCultureNameContainingOrContentContaining(keyword = keyword, keyword2 = keyword)
         val currentUser: User = userFacade.getCurrentUser()
 
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")
 
         return GetCultureListResponse(
                 culture.map { cultureItem ->

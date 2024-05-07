@@ -6,6 +6,7 @@ import scul.projectscul.domain.bookmark.domain.repository.BookMarkRepository
 import scul.projectscul.domain.culture.domain.Culture
 import scul.projectscul.domain.culture.domain.repository.CultureRepository
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureResponse
+import scul.projectscul.domain.review.excpetion.CultureNotFoundException
 import scul.projectscul.domain.user.domain.User
 import scul.projectscul.domain.user.facade.UserFacade
 import java.time.LocalDateTime
@@ -22,9 +23,9 @@ class GetCultureService (
     fun execute(cultureId: UUID): GetCultureResponse {
 
         val currentUser: User = userFacade.getCurrentUser()
-        val culture: Culture = cultureRepository.findCultureById(cultureId)
+        val culture: Culture = cultureRepository.findCultureById(cultureId) ?: throw CultureNotFoundException
         val isBookMarked = bookMarkRepository.existsByCultureAndUser(culture ,currentUser)
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")
         val now = LocalDateTime.now()
 
         val applicationStartDate: LocalDateTime = LocalDateTime.parse(culture.applicationStartDate, formatter)

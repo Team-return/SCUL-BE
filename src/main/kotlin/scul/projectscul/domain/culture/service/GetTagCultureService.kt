@@ -10,7 +10,6 @@ import scul.projectscul.domain.user.domain.User
 import scul.projectscul.domain.user.facade.UserFacade
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-
 @Service
 @Transactional(readOnly = true)
 class GetTagCultureService (
@@ -22,8 +21,7 @@ class GetTagCultureService (
     fun execute(tag: String): GetCultureListResponse {
         val culture: List<Culture> = cultureRepository.findByWantedPeopleContaining(tag)
         val currentUser: User = userFacade.getCurrentUser()
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")
 
         return GetCultureListResponse(
                 culture.map { cultureItem ->

@@ -22,7 +22,7 @@ class GetMyBookMarkService (
 
         val cultureList = bookMarkList.mapNotNull { it.culture }
 
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")
 
         return GetCultureListResponse(
                 cultureList.map { cultureItem ->

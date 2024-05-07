@@ -24,7 +24,7 @@ class GetCultureListService (
         val culture: List<Culture> = cultureRepository.findAll()
         val currentUser: User = userFacade.getCurrentUser()
 
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")
 
 
         return GetCultureListResponse(
