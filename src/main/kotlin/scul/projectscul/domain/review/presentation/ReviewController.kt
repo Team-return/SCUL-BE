@@ -31,12 +31,12 @@ class ReviewController (
     }
 
     @GetMapping("/{culture-id}")
-    fun getReviews(@PathVariable("culture-id") @NotNull cultureId: UUID) : GetReviewsResponse {
+    fun getMyReviews(@PathVariable("culture-id") @NotNull cultureId: UUID) : GetReviewsResponse {
         return getReviewsService.execute(cultureId)
     }
 
     @GetMapping
-    fun getReviews() : GetReviewsResponse {
+    fun getMyReviews() : GetReviewsResponse {
         return getMyReviewService.execute()
     }
 }

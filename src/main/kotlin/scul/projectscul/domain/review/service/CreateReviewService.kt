@@ -29,7 +29,8 @@ class CreateReviewService (
                         content = request.content,
                         user = currentUser,
                         culture = culture,
-                        createdAt = now
+                        createdAt = now,
+                        imageUrls = request.imageUrls
                 )
         )
     }

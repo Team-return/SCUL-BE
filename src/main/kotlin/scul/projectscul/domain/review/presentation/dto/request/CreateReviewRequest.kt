@@ -5,5 +5,7 @@ import jakarta.validation.constraints.Size
 
 data class CreateReviewRequest(
         @field:NotBlank
-        val content: String
+        val content: String,
+
+        val imageUrls: List<String>
 )

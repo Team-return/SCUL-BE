@@ -9,11 +9,12 @@ import com.amazonaws.services.s3.model.ObjectMetadata
 import com.amazonaws.services.s3.model.PutObjectRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import org.springframework.web.multipart.MultipartFile
 import scul.projectscul.domain.user.exception.UserNotFoundException
-import java.io.File
 import java.io.IOException
 import java.sql.Timestamp
 import java.time.LocalDateTime
+import java.util.*
 
 @Component
 class AwsS3Adapter(
@@ -22,28 +23,29 @@ class AwsS3Adapter(
         private val bucket: String
 ) {
 
-    fun upload(file: File): String {
-        inputS3(file, file.name)
-
-        return getResourceUrl(file.name)
+    fun uploadImages(files: List<MultipartFile>): List<String> {
+        return files.map { upload(it) }
     }
 
-    private fun inputS3(file: File, fileName: String) {
+    private fun upload(file: MultipartFile): String {
+        val fileName = "${UUID.randomUUID()}_${file.originalFilename}"
+        inputS3(file, fileName)
+
+        return getResourceUrl(fileName)
+    }
+
+    private fun inputS3(file: MultipartFile, fileName: String) {
         try {
-            val inputStream = file.inputStream()
+            val inputStream = file.inputStream
             val objectMetadata = ObjectMetadata().apply {
-                this.contentLength = file.length()
-                this.contentType = Mimetypes.getInstance().getMimetype(file)
+                this.contentLength = file.size
+                this.contentType = Mimetypes.getInstance().getMimetype(file.originalFilename)
             }
 
             amazonS3Client.putObject(
                     PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
-                            .withCannedAcl(
-                                    CannedAccessControlList.PublicRead
-                            )
+                            .withCannedAcl(CannedAccessControlList.PublicRead)
             )
-
-            file.delete()
         } catch (e: IOException) {
             throw UserNotFoundException
         }
@@ -54,7 +56,6 @@ class AwsS3Adapter(
     }
 
     fun getUploadUrl(fileName: String): String {
-
         val generatePresignedUrlRequest =
                 GeneratePresignedUrlRequest(bucket, fileName)
                         .withMethod(HttpMethod.PUT)

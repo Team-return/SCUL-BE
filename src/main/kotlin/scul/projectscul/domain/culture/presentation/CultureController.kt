@@ -1,18 +1,13 @@
 package scul.projectscul.domain.culture.presentation
 
 import org.jetbrains.annotations.NotNull
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureListResponse
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureResponse
-import scul.projectscul.domain.culture.service.GetCultureListService
-import scul.projectscul.domain.culture.service.GetCultureService
-import scul.projectscul.domain.culture.service.GetTagCultureService
-import scul.projectscul.domain.culture.service.SearchCultureService
+import scul.projectscul.domain.culture.service.*
 import scul.projectscul.infra.open.OpenApiService
+import scul.projectscul.infra.s3.ImageUrlResponse
 import java.util.*
 
 @RequestMapping("/scul/cultures")
@@ -22,8 +17,14 @@ class CultureController (
         private val getCultureListService: GetCultureListService,
         private val getCultureService: GetCultureService,
         private val getTagCultureService: GetTagCultureService,
-        private val searchCultureService: SearchCultureService
+        private val searchCultureService: SearchCultureService,
+        private val createImageUrlService: CreateImageUrlService
 ) {
+
+    @PostMapping("/image")
+    fun createImageUrl(@RequestPart(value = "image", required = false) multipartFiles : List<MultipartFile>): ImageUrlResponse {
+        return createImageUrlService.execute(multipartFiles)
+    }
 
     @GetMapping
     fun getCultureList(): GetCultureListResponse {

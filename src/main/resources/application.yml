@@ -21,6 +21,11 @@ spring:
       host: redis.xquare.app
       port: 6379
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
 jwt:
   header: ${HEADER:Authorization}
   prefix : ${PREFIX:Bearer}
@@ -31,8 +36,8 @@ jwt:
 cloud:
   aws:
     credentials:
-      access-key: ad
-      secret-key: ad
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
     s3:
       bucket: kangsunbucket
     region:

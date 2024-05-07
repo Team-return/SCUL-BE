@@ -1,9 +1,10 @@
 package scul.projectscul.domain.review.domain
 
-import scul.projectscul.domain.bookmark.BaseUUIDEntity
 import jakarta.persistence.*
+import scul.projectscul.domain.bookmark.BaseUUIDEntity
 import scul.projectscul.domain.culture.domain.Culture
 import scul.projectscul.domain.user.domain.User
+import scul.projectscul.infra.s3.StringListConverter
 import java.time.LocalDate
 import java.util.*
 
@@ -23,6 +24,10 @@ class Review (
         val user: User,
 
         @Column
-        val createdAt: LocalDate
+        val createdAt: LocalDate,
+
+        @Convert(converter = StringListConverter::class)
+        @Column(nullable = true)
+        val imageUrls: List<String>
 
 ) : BaseUUIDEntity(id)
