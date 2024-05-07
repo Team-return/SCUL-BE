@@ -36,7 +36,7 @@ class ReviewController (
     }
 
     @GetMapping
-    fun getMyReviews() : GetReviewsResponse {
+    fun getMyReviews() : GetReviewsResponse? {
         return getMyReviewService.execute()
     }
 }

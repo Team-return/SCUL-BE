@@ -13,13 +13,15 @@ class GetMyReviewService (
         private val userFacade: UserFacade
 ) {
 
-    fun execute(): GetReviewsResponse {
+    fun execute(): GetReviewsResponse? {
         val currentUser = userFacade.getCurrentUser()
-        return GetReviewsResponse(
-                reviewRepository.findReviewsByUser(currentUser)
+        return reviewRepository.findReviewsByUser(currentUser)?.let {
+            GetReviewsResponse(
+                it
                         .map {
                             GetReviewsResponse.ReviewsResponse(it)
                         }
         )
+        }
     }
 }

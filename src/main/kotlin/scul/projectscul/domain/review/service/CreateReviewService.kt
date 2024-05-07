@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import scul.projectscul.domain.culture.domain.repository.CultureRepository
 import scul.projectscul.domain.review.domain.Review
 import scul.projectscul.domain.review.domain.repository.ReviewRepository
+import scul.projectscul.domain.review.excpetion.CultureNotFoundException
 import scul.projectscul.domain.review.presentation.dto.request.CreateReviewRequest
 import scul.projectscul.domain.user.facade.UserFacade
 import java.time.LocalDate
@@ -19,7 +20,7 @@ class CreateReviewService (
 ){
     fun execute(request: CreateReviewRequest, cultureId: UUID) {
         val currentUser = userFacade.getCurrentUser()
-        val culture = cultureRepository.findCultureById(cultureId)
+        val culture = cultureRepository.findCultureById(cultureId) ?: throw CultureNotFoundException
 
         val now = LocalDate.now()
 

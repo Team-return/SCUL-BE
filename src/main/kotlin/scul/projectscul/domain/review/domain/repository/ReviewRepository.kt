@@ -9,6 +9,6 @@ interface ReviewRepository : JpaRepository<Review, UUID> {
 
     fun findReviewsByCulture_Id(id: UUID) : List<Review>
 
-    fun findReviewsByUser(user: User) : List<Review>
+    fun findReviewsByUser(user: User) : List<Review>?
 
 }

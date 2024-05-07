@@ -16,8 +16,8 @@ enum class ErrorCode(
     LOG_NOT_EXIST(404, "Log Not Exist"),
     ROLE_NOT_ADMIN(401,"Role Not Admin"),
 
-    //place
-    PLACE_NOT_FOUND(404, "Place Not Found"),
+    //culture
+    CULTURE_NOT_FOUND(404, "Culture Not Found"),
 
     //file
     FILE_BAD_REQUEST(400, "File Bad Request"),

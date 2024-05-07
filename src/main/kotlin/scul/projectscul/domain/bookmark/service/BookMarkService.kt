@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import scul.projectscul.domain.bookmark.domain.BookMark
 import scul.projectscul.domain.bookmark.domain.repository.BookMarkRepository
 import scul.projectscul.domain.culture.domain.repository.CultureRepository
+import scul.projectscul.domain.review.excpetion.CultureNotFoundException
 import scul.projectscul.domain.user.facade.UserFacade
 import java.util.UUID
 
@@ -19,7 +20,7 @@ class BookMarkService (
 
     fun execute(cultureId: UUID) {
         val currentUser = userFacade.getCurrentUser()
-        val culture = cultureRepository.findCultureById(cultureId)
+        val culture = cultureRepository.findCultureById(cultureId) ?: throw CultureNotFoundException
 
         val bookMark = bookMarkRepository.findBookMarkByCultureAndUser(culture, currentUser)
         if (bookMark != null) {
