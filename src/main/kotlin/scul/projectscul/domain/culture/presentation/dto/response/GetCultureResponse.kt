@@ -14,8 +14,7 @@ data class GetCultureResponse (
     val wantedPeople: String,
     val content: String,
     val phoneNumber: String,
-    val applicationStartDate: String,
-    val applicationEndDate: String,
+    val isApplicationAble: Boolean,
     val serviceStartDate: String,
     val serviceEndDate: String,
     val cultureLink: String,
@@ -24,7 +23,7 @@ data class GetCultureResponse (
 )
 {
     companion object {
-        fun of(culture: Culture, isBookMarked: Boolean): GetCultureResponse {
+        fun of(culture: Culture, isBookMarked: Boolean, isApplicationAble: Boolean): GetCultureResponse {
             val wantedPeoples = culture.wantedPeople.drop(1)
             return GetCultureResponse(
                     id = culture.id,
@@ -37,8 +36,7 @@ data class GetCultureResponse (
                     wantedPeople = wantedPeoples,
                     content = culture.content,
                     phoneNumber = culture.phoneNumber,
-                    applicationStartDate = culture.applicationStartDate,
-                    applicationEndDate = culture.applicationEndDate,
+                    isApplicationAble = isApplicationAble,
                     serviceStartDate = culture.serviceStartDate,
                     serviceEndDate = culture.serviceEndDate,
                     cultureLink = culture.cultureLink,

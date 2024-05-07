@@ -14,7 +14,6 @@ data class GetCultureListResponse(
             val imageUrl: String,
             val cultureName: String,
             val wantedPeople: String,
-            val applicationStartDate: String,
-            val applicationEndDate: String,
+            val isApplicationAble: Boolean
     )
 }
