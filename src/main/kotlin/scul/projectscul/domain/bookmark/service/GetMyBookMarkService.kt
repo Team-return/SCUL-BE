@@ -3,16 +3,17 @@ package scul.projectscul.domain.bookmark.service
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import scul.projectscul.domain.bookmark.domain.repository.BookMarkRepository
+import scul.projectscul.domain.culture.facade.CultureFacade
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureListResponse
 import scul.projectscul.domain.user.facade.UserFacade
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @Service
 @Transactional(readOnly = true)
 class GetMyBookMarkService (
         private val userFacade: UserFacade,
         private val bookMarkRepository: BookMarkRepository,
+        private val cultureFacade: CultureFacade
 ) {
 
     fun execute(): GetCultureListResponse {
@@ -22,18 +23,14 @@ class GetMyBookMarkService (
 
         val cultureList = bookMarkList.mapNotNull { it.culture }
 
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")
+        val now = LocalDateTime.now()
 
         return GetCultureListResponse(
                 cultureList.map { cultureItem ->
                     val wantedPeople = cultureItem.wantedPeople.drop(1) //첫 번째 글자 제거함
 
-                    val now = LocalDateTime.now()
+                    val isApplicationAble = cultureFacade.formatApplicationTime(cultureItem, now)
 
-                    val applicationStartDate: LocalDateTime = LocalDateTime.parse(cultureItem.applicationStartDate, formatter)
-                    val applicationEndDate: LocalDateTime = LocalDateTime.parse(cultureItem.applicationEndDate, formatter)
-
-                    val isApplicationAble = now >= applicationStartDate && now <= applicationEndDate
                     GetCultureListResponse.CultureListResponse(
                             id = cultureItem.id,
                             location = cultureItem.location,
