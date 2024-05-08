@@ -63,6 +63,8 @@ class OpenApiService (
                         applicationEndDate = element.getElementsByTagName("RCPTENDDT").item(0).textContent,
                         serviceStartDate = element.getElementsByTagName("SVCOPNBGNDT").item(0).textContent,
                         serviceEndDate = element.getElementsByTagName("SVCOPNENDDT").item(0).textContent,
+                        serviceStartTime = element.getElementsByTagName("V_MIN").item(0).textContent,
+                        serviceEndTime = element.getElementsByTagName("V_MAX").item(0).textContent,
                         cultureName = element.getElementsByTagName("SVCNM").item(0).textContent,
                         ticketPrice = element.getElementsByTagName("PAYATNM").item(0).textContent,
                         placeName = element.getElementsByTagName("PLACENM").item(0).textContent,

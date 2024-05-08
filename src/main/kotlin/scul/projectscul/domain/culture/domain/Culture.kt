@@ -45,6 +45,12 @@ class Culture (
         //서비스 개시 시작일시
         val serviceEndDate: String,
 
+        //서비스 개시 시작 시간
+        val serviceStartTime: String,
+
+        //서비스 개시 시작 시간
+        val serviceEndTime: String,
+
         //입장료
         @Column(nullable = true)
         val ticketPrice: String,
