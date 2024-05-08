@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import scul.projectscul.domain.review.presentation.dto.request.CreateReviewRequest
+import scul.projectscul.domain.review.presentation.dto.response.GetReviewResponse
 import scul.projectscul.domain.review.presentation.dto.response.GetReviewsResponse
 import scul.projectscul.domain.review.service.CreateReviewService
 import scul.projectscul.domain.review.service.GetMyReviewService
@@ -36,7 +37,7 @@ class ReviewController (
     }
 
     @GetMapping
-    fun getMyReviews() : GetReviewsResponse? {
+    fun getMyReviews() : GetReviewResponse? {
         return getMyReviewService.execute()
     }
 }

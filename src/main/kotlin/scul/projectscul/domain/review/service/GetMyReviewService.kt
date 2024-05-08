@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import scul.projectscul.domain.culture.domain.repository.CultureRepository
 import scul.projectscul.domain.review.domain.repository.ReviewRepository
+import scul.projectscul.domain.review.presentation.dto.response.GetReviewResponse
 import scul.projectscul.domain.review.presentation.dto.response.GetReviewsResponse
 import scul.projectscul.domain.user.facade.UserFacade
 
@@ -15,15 +16,15 @@ class GetMyReviewService (
         private val cultureRepository: CultureRepository
 ) {
 
-    fun execute(): GetReviewsResponse? {
+    fun execute(): GetReviewResponse? {
         val currentUser = userFacade.getCurrentUser()
         return reviewRepository.findReviewsByUser(currentUser)?.let {
-            GetReviewsResponse(
+            GetReviewResponse(
                 it
                         .map {
                             val culture = cultureRepository.findById(it.culture.id)
                             val placeName: String = culture!!.placeName
-                            GetReviewsResponse.ReviewsResponse(it, placeName)
+                            GetReviewResponse.ReviewResponse(it, placeName)
                         }
         )
         }

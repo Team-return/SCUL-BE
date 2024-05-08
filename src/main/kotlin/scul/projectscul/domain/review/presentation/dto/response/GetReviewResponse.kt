@@ -4,22 +4,24 @@ import scul.projectscul.domain.review.domain.Review
 import java.time.LocalDate
 import java.util.UUID
 
-data class GetReviewsResponse(
-        val reviewList: List<ReviewsResponse>
+data class GetReviewResponse(
+        val reviewList: List<ReviewResponse>
 ) {
-    data class ReviewsResponse (
+    data class ReviewResponse (
             val id: UUID?,
             val writer: String,
             val content: String,
             val createdAt: LocalDate,
-            val imageUrls: List<String>
+            val imageUrls: List<String>,
+            val placeName: String
     ) {
-        constructor(review: Review): this(
+        constructor(review: Review, placeName: String): this(
                 id = review.id,
                 writer = review.user.name,
                 content = review.content,
                 createdAt = review.createdAt,
-                imageUrls = review.imageUrls
+                imageUrls = review.imageUrls,
+                placeName = placeName
         )
     }
 }
