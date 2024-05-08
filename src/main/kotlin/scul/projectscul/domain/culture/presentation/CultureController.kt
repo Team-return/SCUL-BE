@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureListResponse
+import scul.projectscul.domain.culture.presentation.dto.response.GetCultureNameListResponse
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureResponse
 import scul.projectscul.domain.culture.service.*
 import scul.projectscul.infra.open.OpenApiService
@@ -18,6 +19,7 @@ class CultureController (
         private val getCultureService: GetCultureService,
         private val getTagCultureService: GetTagCultureService,
         private val searchCultureService: SearchCultureService,
+        private val nameSearchCultureService: NameSearchCultureService,
         private val createImageUrlService: CreateImageUrlService
 ) {
 
@@ -44,6 +46,11 @@ class CultureController (
     @GetMapping("/search")
     fun searchCulture(@RequestParam(name = "keyword") keyword: String): GetCultureListResponse {
         return searchCultureService.execute(keyword)
+    }
+
+    @GetMapping("/name/search")
+    fun nameSearchCulture(@RequestParam(name = "keyword") keyword: String): GetCultureNameListResponse {
+        return nameSearchCultureService.execute(keyword)
     }
 
     @GetMapping("/api")

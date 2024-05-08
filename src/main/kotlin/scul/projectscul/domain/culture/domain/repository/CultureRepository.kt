@@ -13,5 +13,5 @@ interface CultureRepository: JpaRepository<Culture, UUID> {
 
     fun findByCultureNameContainingOrContentContaining(keyword: String, keyword2: String): List<Culture>
 
-    fun findCulturesByWantedPeopleContainingAndCultureNameContaining(wantedPeople: String?, cultureName: String?) : List<Culture>
+    fun findByCultureNameContaining(keyword: String): List<Culture>
 }
