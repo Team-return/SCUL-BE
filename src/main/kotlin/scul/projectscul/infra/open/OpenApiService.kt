@@ -18,7 +18,6 @@ class OpenApiService (
         private val cultureRepository: CultureRepository
 ) {
     suspend fun execute(startPage: Int, endPage: Int) {
-        cultureRepository.deleteAll()
         fetchCultures(startPage, endPage)
     }
 
