@@ -9,6 +9,8 @@ interface CultureRepository: JpaRepository<Culture, UUID> {
 
     fun findCultureById(cultureId: UUID) : Culture?
 
+    fun findCultureById(cultureId: UUID?) : Culture?
+
     fun findByWantedPeopleContaining(tag: String) : List<Culture>
 
     fun findByCultureNameContainingOrContentContaining(keyword: String, keyword2: String): List<Culture>

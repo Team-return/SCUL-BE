@@ -28,6 +28,6 @@ class Review (
 
         @Convert(converter = StringListConverter::class)
         @Column(nullable = true)
-        val imageUrls: List<String>
+        val imageUrls: List<String>,
 
 ) : BaseUUIDEntity(id)

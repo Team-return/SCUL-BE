@@ -12,14 +12,16 @@ data class GetReviewsResponse(
             val writer: String,
             val content: String,
             val createdAt: LocalDate,
-            val imageUrls: List<String>
+            val imageUrls: List<String>,
+            val placeName: String
     ) {
-        constructor(review: Review): this(
+        constructor(review: Review, placeName: String): this(
                 id = review.id,
                 writer = review.user.name,
                 content = review.content,
                 createdAt = review.createdAt,
-                imageUrls = review.imageUrls
+                imageUrls = review.imageUrls,
+                placeName = placeName
         )
     }
 }

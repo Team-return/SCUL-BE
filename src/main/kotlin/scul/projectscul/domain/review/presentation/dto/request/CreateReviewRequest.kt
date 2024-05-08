@@ -7,5 +7,7 @@ data class CreateReviewRequest(
         @field:NotBlank
         val content: String,
 
-        val imageUrls: List<String>
+        val imageUrls: List<String>,
+
+        val placeName: String
 )
