@@ -21,7 +21,7 @@ class GetMyReviewService (
             GetReviewsResponse(
                 it
                         .map {
-                            val culture = cultureRepository.findCultureById(it.culture.id)
+                            val culture = cultureRepository.findById(it.culture.id)
                             val placeName: String = culture!!.placeName
                             GetReviewsResponse.ReviewsResponse(it, placeName)
                         }
