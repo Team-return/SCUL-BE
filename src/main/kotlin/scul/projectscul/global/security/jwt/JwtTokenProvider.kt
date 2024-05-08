@@ -23,9 +23,7 @@ class JwtTokenProvider(
         private val authDetailsService: AuthDetailsService,
         private val refreshTokenRepository: RefreshTokenRepository
 ) {
-
-    val key: Key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
-
+    
     companion object {
         private const val ACCESS = "access_token"
         private const val REFRESH = "refresh_token"
@@ -45,7 +43,7 @@ class JwtTokenProvider(
         return Jwts.builder()
             .setSubject(accountId)
             .claim("typ", typ)
-            .signWith(key, SignatureAlgorithm.HS256)
+            .signWith(jwtProperties.secretKey2, SignatureAlgorithm.HS256)
             .setExpiration(Date(System.currentTimeMillis() + exp * 1000))
             .setIssuedAt(Date())
             .compact()
@@ -57,7 +55,7 @@ class JwtTokenProvider(
             .setHeaderParam("type", type)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + ttl * 1000))
-                .signWith(key, SignatureAlgorithm.HS256)
+                .signWith(jwtProperties.secretKey2, SignatureAlgorithm.HS256)
                 .compact()
     }
 
@@ -74,7 +72,7 @@ class JwtTokenProvider(
     private fun getClaims(token: String): Claims {
         return try {
             Jwts.parser()
-                .setSigningKey(key)
+                .setSigningKey(jwtProperties.secretKey2)
                 .parseClaimsJws(token)
                 .body
         } catch (e: ExpiredJwtException) {
