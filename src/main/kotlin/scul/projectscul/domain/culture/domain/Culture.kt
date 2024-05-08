@@ -22,7 +22,7 @@ class Culture (
         val wantedPeople: String,
 
         //서비스명 ex)느낌 있는 박물관> 교육생 모집 안내
-        @Column(columnDefinition = "VARCHAR(50)", nullable = true)
+        @Column(columnDefinition = "VARCHAR(150)", nullable = true)
         val cultureName: String,
 
         //상세내용
