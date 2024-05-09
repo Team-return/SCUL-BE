@@ -12,7 +12,7 @@ class CultureFacade(
         private val cultureRepository: CultureRepository
 
 ) {
-    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")
 
     fun formatApplicationTime(cultureItem: Culture, now: LocalDateTime): Boolean {
         val applicationStartDate: LocalDateTime = LocalDateTime.parse(cultureItem.applicationStartDate, formatter)
