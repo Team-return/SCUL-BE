@@ -14,9 +14,9 @@ class CultureFacade(
 ) {
     val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
-    fun formatApplicationTime(cultureItem: Culture, now: LocalDate): Boolean {
-        val applicationStartDate: LocalDate = LocalDate.parse(cultureItem.applicationStartDate, formatter)
-        val applicationEndDate: LocalDate = LocalDate.parse(cultureItem.applicationEndDate, formatter)
+    fun formatApplicationTime(cultureItem: Culture, now: LocalDateTime): Boolean {
+        val applicationStartDate: LocalDateTime = LocalDateTime.parse(cultureItem.applicationStartDate, formatter)
+        val applicationEndDate: LocalDateTime = LocalDateTime.parse(cultureItem.applicationEndDate, formatter)
 
         return now >= applicationStartDate && now <= applicationEndDate
     }

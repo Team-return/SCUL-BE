@@ -24,7 +24,7 @@ class GetCultureListService (
     fun execute(): GetCultureListResponse {
         val culture: List<Culture> = cultureRepository.findAll()
         val currentUser: User = userFacade.getCurrentUser()
-        val now = LocalDate.now()
+        val now = LocalDateTime.now()
 
 
         return GetCultureListResponse(

@@ -25,7 +25,7 @@ class GetCultureService (
 ) {
     fun execute(cultureId: UUID): GetCultureResponse {
 
-        val now = LocalDate.now()
+        val now = LocalDateTime.now()
 
         val currentUser: User = userFacade.getCurrentUser()
         val culture: Culture = cultureRepository.findCultureById(cultureId) ?: throw CultureNotFoundException

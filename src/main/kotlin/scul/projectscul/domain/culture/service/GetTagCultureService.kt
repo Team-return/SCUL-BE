@@ -23,7 +23,7 @@ class GetTagCultureService (
     fun execute(tag: String): GetCultureListResponse {
         val culture: List<Culture> = cultureRepository.findByWantedPeopleContaining(tag)
         val currentUser: User = userFacade.getCurrentUser()
-        val now = LocalDate.now()
+        val now = LocalDateTime.now()
 
         return GetCultureListResponse(
                 culture.map { cultureItem ->

@@ -24,7 +24,7 @@ class GetMyBookMarkService (
 
         val cultureList = bookMarkList.mapNotNull { it.culture }
 
-        val now = LocalDate.now()
+        val now = LocalDateTime.now()
 
         return GetCultureListResponse(
                 cultureList.map { cultureItem ->

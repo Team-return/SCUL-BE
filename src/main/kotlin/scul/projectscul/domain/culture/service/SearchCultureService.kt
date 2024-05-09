@@ -23,7 +23,7 @@ class SearchCultureService (
     fun execute(keyword: String): GetCultureListResponse {
         val culture: List<Culture> = cultureRepository.findByCultureNameContainingOrContentContaining(keyword = keyword, keyword2 = keyword)
         val currentUser: User = userFacade.getCurrentUser()
-        val now = LocalDate.now()
+        val now = LocalDateTime.now()
 
 
         return GetCultureListResponse(
