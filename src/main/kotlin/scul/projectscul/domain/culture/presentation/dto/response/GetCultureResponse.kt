@@ -1,31 +1,30 @@
 package scul.projectscul.domain.culture.presentation.dto.response
 
 import scul.projectscul.domain.culture.domain.Culture
+import java.text.SimpleDateFormat
 import java.util.*
-
 data class GetCultureResponse (
-    val id: UUID?,
-    val location: String,
-    val placeName: String,
-    val ticketPrice: String,
-    val isBookMarked: Boolean,
-    val imageUrl: String,
-    val cultureName: String,
-    val wantedPeople: String,
-    val content: String,
-    val phoneNumber: String,
-    val isApplicationAble: Boolean,
-    val applicationStartDate: String,
-    val applicationEndDate: String,
-    val serviceStartTime: String,
-    val serviceEndTime: String,
-    val serviceStartDate: String,
-    val serviceEndDate: String,
-    val cultureLink: String,
-    val xCoordinate: Double,
-    val yCoordinate: Double
-)
-{
+        val id: UUID?,
+        val location: String,
+        val placeName: String,
+        val ticketPrice: String,
+        val isBookMarked: Boolean,
+        val imageUrl: String,
+        val cultureName: String,
+        val wantedPeople: String,
+        val content: String,
+        val phoneNumber: String,
+        val isApplicationAble: Boolean,
+        val applicationStartDate: String,
+        val applicationEndDate: String,
+        val serviceStartTime: String?,
+        val serviceEndTime: String?,
+        val serviceStartDate: String,
+        val serviceEndDate: String,
+        val cultureLink: String,
+        val xCoordinate: Double,
+        val yCoordinate: Double
+) {
     companion object {
         fun of(culture: Culture, isBookMarked: Boolean, isApplicationAble: Boolean): GetCultureResponse {
             val wantedPeoples = culture.wantedPeople.drop(1)
@@ -41,16 +40,25 @@ data class GetCultureResponse (
                     content = culture.content,
                     phoneNumber = culture.phoneNumber,
                     isApplicationAble = isApplicationAble,
-                    applicationStartDate = culture.applicationStartDate,
-                    applicationEndDate = culture.applicationEndDate,
+                    applicationStartDate = formatDates(culture.applicationStartDate),
+                    applicationEndDate = formatDates(culture.applicationEndDate),
                     serviceStartTime = culture.serviceStartTime,
                     serviceEndTime = culture.serviceEndTime,
-                    serviceStartDate = culture.serviceStartDate,
-                    serviceEndDate = culture.serviceEndDate,
+                    serviceStartDate = formatDates(culture.serviceStartDate),
+                    serviceEndDate = formatDates(culture.serviceEndDate),
                     cultureLink = culture.cultureLink,
                     xCoordinate = culture.xCoordinate,
                     yCoordinate = culture.yCoordinate
             )
+        }
+        private fun formatDates(dateString: String?): String {
+            if (dateString != null) {
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S")
+                val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+                val date = inputFormat.parse(dateString)
+                return outputFormat.format(date)
+            }
+            return ""
         }
     }
 }
