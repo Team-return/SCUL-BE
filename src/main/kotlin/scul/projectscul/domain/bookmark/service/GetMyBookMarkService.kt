@@ -6,6 +6,7 @@ import scul.projectscul.domain.bookmark.domain.repository.BookMarkRepository
 import scul.projectscul.domain.culture.facade.CultureFacade
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureListResponse
 import scul.projectscul.domain.user.facade.UserFacade
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Service
@@ -23,7 +24,7 @@ class GetMyBookMarkService (
 
         val cultureList = bookMarkList.mapNotNull { it.culture }
 
-        val now = LocalDateTime.now()
+        val now = LocalDate.now()
 
         return GetCultureListResponse(
                 cultureList.map { cultureItem ->

@@ -9,6 +9,7 @@ import scul.projectscul.domain.culture.facade.CultureFacade
 import scul.projectscul.domain.culture.presentation.dto.response.GetCultureListResponse
 import scul.projectscul.domain.user.domain.User
 import scul.projectscul.domain.user.facade.UserFacade
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Service
@@ -22,7 +23,7 @@ class SearchCultureService (
     fun execute(keyword: String): GetCultureListResponse {
         val culture: List<Culture> = cultureRepository.findByCultureNameContainingOrContentContaining(keyword = keyword, keyword2 = keyword)
         val currentUser: User = userFacade.getCurrentUser()
-        val now = LocalDateTime.now()
+        val now = LocalDate.now()
 
 
         return GetCultureListResponse(

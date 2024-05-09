@@ -10,6 +10,7 @@ import scul.projectscul.domain.culture.presentation.dto.response.GetCultureRespo
 import scul.projectscul.domain.review.excpetion.CultureNotFoundException
 import scul.projectscul.domain.user.domain.User
 import scul.projectscul.domain.user.facade.UserFacade
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.UUID
@@ -24,7 +25,7 @@ class GetCultureService (
 ) {
     fun execute(cultureId: UUID): GetCultureResponse {
 
-        val now = LocalDateTime.now()
+        val now = LocalDate.now()
 
         val currentUser: User = userFacade.getCurrentUser()
         val culture: Culture = cultureRepository.findCultureById(cultureId) ?: throw CultureNotFoundException
