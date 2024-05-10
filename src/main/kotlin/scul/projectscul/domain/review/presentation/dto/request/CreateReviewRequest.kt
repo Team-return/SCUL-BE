@@ -8,6 +8,4 @@ data class CreateReviewRequest(
         val content: String,
 
         val imageUrls: List<String>,
-
-        val placeName: String
-)
+        )

@@ -15,7 +15,7 @@ class BookMarkController (
 ) {
 
     @PostMapping("/{culture-id}")
-    fun createReview(
+    fun createBookMark(
             @PathVariable("culture-id") @NotNull cultureId: UUID
     ) {
         bookMarkService.execute(cultureId)
